@@ -50,4 +50,4 @@ connection_pool = ThreadPoolExecutor(
 global_cache: Dict[str, Any] = {}
 cache_lock = asyncio.Lock()
 
-from .client_optimized import ClientOptimized as Client
+from .client_optimized import ClientOptimized
