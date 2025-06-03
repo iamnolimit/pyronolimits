@@ -50,6 +50,4 @@ connection_pool = ThreadPoolExecutor(
 global_cache: Dict[str, Any] = {}
 cache_lock = asyncio.Lock()
 
-from . import raw, types, filters, handlers, emoji, enums
 from .client_optimized import ClientOptimized as Client
-from .sync import idle, compose
