@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License v3.0 (LGPL-3.0)"
 __copyright__ = "Copyright (C) 2017-present Dan <https://github.com/delivrance>"
 
 import asyncio
+import os
 from concurrent.futures.thread import ThreadPoolExecutor
 from typing import Dict, Any
 
@@ -23,8 +24,17 @@ class ContinuePropagation(StopAsyncIteration):
     pass
 
 
+# Get CPU count synchronously at import time
+CPU_COUNT = os.cpu_count() or 4
+
+# Jika CPU_COUNT ternyata adalah Future
+if isinstance(CPU_COUNT, asyncio.Future):
+    import asyncio
+    loop = asyncio.get_event_loop()
+    CPU_COUNT = loop.run_until_complete(CPU_COUNT)
+
+
 # Optimized thread pool with better sizing
-CPU_COUNT = asyncio.get_event_loop().run_in_executor(None, lambda: __import__('os').cpu_count()) or 4
 crypto_executor = ThreadPoolExecutor(
     max_workers=min(4, CPU_COUNT),
     thread_name_prefix="CryptoWorker"
