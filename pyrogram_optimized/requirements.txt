@@ -1,0 +1,18 @@
+# Core dependencies
+pyaes==1.6.1
+pysocks==1.7.1
+
+# Performance optimizations
+tgcrypto>=1.2.5  # Fast crypto operations
+cryptography>=41.0.0  # Fallback crypto library
+uvloop>=0.17.0; sys_platform != "win32"  # Fast event loop (Unix only)
+aiofiles>=23.0.0  # Async file operations
+orjson>=3.9.0  # Fast JSON serialization
+cython>=3.0.0  # For potential Cython extensions
+
+# Optional performance libraries
+# Uncomment if needed:
+# msgpack>=1.0.0  # Fast serialization
+# lz4>=4.0.0  # Fast compression
+# xxhash>=3.0.0  # Fast hashing
+# psutil>=5.9.0  # System monitoring
